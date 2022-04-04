@@ -8,7 +8,7 @@ public class TesterListaSimple {
         listaSimple.addFirst(4);
         listaSimple.addFirst(7);
         listaSimple.add(2, 25);
-        listaSimple.add(2, 7);
+        listaSimple.add(5, 7);
 
         System.out.println("\nBuscar(25): " + listaSimple.search(25));
 
@@ -32,6 +32,12 @@ public class TesterListaSimple {
 
         System.out.println("\nEliminar en posicion 2: " + listaSimple.removeAt(2));
 
+        listaSimple.addFirst(7);
+
+        System.out.println("\nContenido: " + listaSimple.showListRecursive());
+        System.out.println("- Número de nodos: " + listaSimple.getSize());
+
+        listaSimple.sort();
 
         System.out.println("\nContenido: " + listaSimple.showListRecursive());
         System.out.println("- Número de nodos: " + listaSimple.getSize());

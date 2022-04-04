@@ -72,142 +72,79 @@ public class SinglyLinkedList<T extends Comparable<T>> {
     public void add(int index, T newElement) {
         Node<T> newNode = new Node<T>(newElement);
 
-        if (index < 0 || index > this.size - 1)
-            System.out.println("Los subíndices de la lista deben estar en el rango: [0, " + (this.size - 1) + ")");
+        if (index < 0 || index > size)
+            System.out.println("Índice fuera de rango");
 
         else if (index == 0)
             addFirst(newElement);
 
-        else if (index == this.size)
+        else if (index == size)
             addLast(newElement);
 
         else {
-            Node<T> auxiliarNode = head;
+            var previousNodeAtIndex = head;
             for (int i = 0; i < index - 1; i++)
-                auxiliarNode = auxiliarNode.getNext();
+                previousNodeAtIndex = previousNodeAtIndex.getNext();
 
-            var oldNodeInPosition = auxiliarNode.getNext();
-            auxiliarNode.setNext(newNode);
-            newNode.setNext(oldNodeInPosition);
+            var oldNodeAtIndex = previousNodeAtIndex.getNext();
+            previousNodeAtIndex.setNext(newNode);
+            newNode.setNext(oldNodeAtIndex);
             size++;
         }
 
     }
-    /*
-     * Function to swap Nodes x and y in linked list by changing links
-     */
-    public void swapNodes(T firstElement, T secondElement) {
-        // Nothing to do if firstElement and secondElement are same
-        if (firstElement.equals(secondElement))
-            return;
 
-        // Search for firstElement (keep track of prevFirstElemenNode and CurrX)
-        Node prevFirstElemenNode = null, currentFirstElemenNode = head;
-        while (currentFirstElemenNode != null && !currentFirstElemenNode.getElement().equals(firstElement)) {
-            prevFirstElemenNode = currentFirstElemenNode;
-            currentFirstElemenNode = currentFirstElemenNode.getNext();
-        }
-        // Search for secondElement (keep track of prevSecondElemenNode and currentSecondElemenNode)
-        Node prevSecondElemenNode = null, currentSecondElemenNode = head;
-        while (currentSecondElemenNode != null && !currentSecondElemenNode.getElement().equals(secondElement)) {
-            prevSecondElemenNode = currentSecondElemenNode;
-            currentSecondElemenNode = currentSecondElemenNode.next;
-        }
-
-        // If either firstElement or secondElement is not present, nothing to do
-        if (currentFirstElemenNode == null || currentSecondElemenNode == null)
-            return;
-
-        // If firstElement is not head of linked list
-        if (prevFirstElemenNode != null)
-            prevFirstElemenNode.setNext(currentSecondElemenNode);
-        else // make secondElement the new head
-            head = currentSecondElemenNode;
-
-        // If secondElement is not head of linked list
-        if (prevSecondElemenNode != null)
-            prevSecondElemenNode.setNext(currentFirstElemenNode);
-        else // make firstElement the new head
-            head = currentFirstElemenNode;
-
-        // Swap next pointers
-        Node temp = currentFirstElemenNode.getNext();
-        currentFirstElemenNode.setNext(currentSecondElemenNode.getNext());
-        currentSecondElemenNode.setNext(temp);
-    }
-
-    public void shuffle() {
-        Random random = new Random();
-        // start from the end of the list
-        for (int i = getSize() - 1; i > 0; i--) {
-            int j = random.nextInt(i + 1);
-            swapNodes(getAt(j), getAt(i));
-        }
-    }
-
-    public void sortList(){
-        quickSort(0, this.size - 1);
-    }
-
-    public void quickSort(int first, int last) {
-        int i, j , center;
-        T pivot;
-        center = (first + last)/2;
-        pivot = getAt(center);
-        i = first;
-        j = last;
-        do {
-            while (getAt(i).compareTo(pivot) < 0)
-                i++;
-            while (getAt(j).compareTo(pivot) > 0)
-                j--;
-            if (i <= j) {
-                swapNodes(getAt(i), getAt(j));
-                i++;
-                j--;
+    // sort the list using the direct selection algorithm
+    public void sort() {
+        for (int i = 0; i < size - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < size; j++) {
+                if (getAt(j).compareTo(getAt(minIndex)) < 0)
+                    minIndex = j;
             }
-        }while (i <= j);
-
-        if (first < j)
-            quickSort(first, j);
-        if (i < last)
-            quickSort(i, last);
-
+            swap(i, minIndex);
+        }
     }
 
-    public void ordenarLista() {
-        for (Node<T> current = head; current != null; current = current.getNext())
-            for (Node<T> nextNode = head; nextNode.getNext() != null; nextNode = nextNode.getNext()){
-                if (current.getElement().compareTo(nextNode.getElement()) < 0) {
-                    T aux;
-                    aux = current.getElement();
-                    current.setElement(nextNode.getElement());
-                    nextNode.setElement(aux);
-                }
-            }
-
+    public void swap(int i, int j) {
+        T aux = getAt(i);
+        setAt(i, getAt(j));
+        setAt(j, aux);
     }
-//
+
+    public void setAt(int index, T element) {
+        if (index < 0 || index > this.size - 1)
+            System.out.println("Los subíndices de la lista deben estar en el rango: [0, " + (this.size - 1) + ")");
+
+        else {
+            Node<T> auxiliarNode = head;
+            for (int i = 0; i < index; i++)
+                auxiliarNode = auxiliarNode.getNext();
+
+            auxiliarNode.setElement(element);
+        }
+    }
+
+
     public T removeAt(int index){
 
-        if (index < 0 || index > this.size - 1) {
-            System.out.println("Los subíndices de la lista deben estar en el rango: [0, " + (this.size - 1) + ")");
-            return null;
-        }
+        if (index < 0 || index > this.size - 1)
+            System.out.println("Índice fuera de rango");
+
         if (index == 0)
             return removeFirst();
 
         if (index == this.size - 1)
             return removeLast();
 
-        Node<T> nodeAtIndex = head;
+        var previousNodeAtIndex = head;
         for (int i = 0; i < index - 1; i++)
-            nodeAtIndex = nodeAtIndex.getNext();
+            previousNodeAtIndex = previousNodeAtIndex.getNext();
 
-        Node<T> auxiliarNode = nodeAtIndex.getNext();
-        nodeAtIndex.setNext(auxiliarNode.getNext());
+        Node<T> nodeAtIndex = previousNodeAtIndex.getNext();
+        previousNodeAtIndex.setNext(nodeAtIndex.getNext());
         size--;
-        return auxiliarNode.getElement();
+        return nodeAtIndex.getElement();
 
     }
 
@@ -220,7 +157,7 @@ public class SinglyLinkedList<T extends Comparable<T>> {
     }
 
     public T getAt(int index) {
-        Node<T> auxiliarNode = head;
+        var auxiliarNode = head;
         if (index > 0 || index < this.size - 1) {
             for (int i = 0; i < index; i++)
                 auxiliarNode = auxiliarNode.getNext();
@@ -234,7 +171,7 @@ public class SinglyLinkedList<T extends Comparable<T>> {
 
 
     public int search(T element) {
-        Node<T> auxiliarNode = head;
+        var auxiliarNode = head;
 
         for (int index = 0; index < this.size; index++) {
             if (element.equals(auxiliarNode.getElement()))
