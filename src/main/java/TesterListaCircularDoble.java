@@ -5,7 +5,6 @@ public class TesterListaCircularDoble {
         circularList.addLast(4);
         circularList.addLast(5);
 
-        circularList.removeFirst();
-        circularList.removeLast();
+
     }
 }
