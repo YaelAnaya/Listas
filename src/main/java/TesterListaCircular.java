@@ -4,9 +4,10 @@ public class TesterListaCircular {
         listaCircular.addFirst(2);
         listaCircular.addLast(3);
         listaCircular.addFirst(7);
-        listaCircular.removeFirst();
+        //listaCircular.removeFirst();
 
         System.out.println(listaCircular.showList());
+        listaCircular.sort();
         System.out.println(listaCircular.showListRecursive());
     }
 }

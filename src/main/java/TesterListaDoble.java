@@ -7,16 +7,10 @@ public class TesterListaDoble {
         listaDoble.addLast(3);
         listaDoble.addFirst(0);
 
-        System.out.println("\nElementos: " + listaDoble.showList() + "\t -> Nodos = " + listaDoble.getSize());
+        System.out.println(listaDoble.showList());
+        listaDoble.sort();
 
-        System.out.println("\nElemento eliminado: " + listaDoble.removeFirst() + "\t -> Nodos = " + listaDoble.getSize());
-        System.out.println("\nElemento eliminado: " + listaDoble.removeLast() + "\t -> Nodos = " + listaDoble.getSize());
+        System.out.println(listaDoble.showListRecursive());
 
-        System.out.println("\nElementos: " + listaDoble.showListRecursive() + "\t -> Nodos = " + listaDoble.getSize());
-
-        while(!listaDoble.isEmpty())
-            listaDoble.removeFirst();
-
-        System.out.println("\nElementos: " + listaDoble.showList() + "\t -> Nodos = " + listaDoble.getSize());
     }
 }

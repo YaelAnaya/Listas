@@ -2,56 +2,44 @@ public class TesterListaSimple {
     public static void main(String[] args) {
 
 
-        var listaSimple = new SinglyLinkedList<Integer>();
-        listaSimple.addFirst(1);
-        listaSimple.addLast(20);
-        listaSimple.addFirst(4);
-        listaSimple.addFirst(7);
-        listaSimple.add(2, 25);
-        listaSimple.add(5, 7);
+        var linkedList = new SinglyLinkedList<Integer>();
+        linkedList.addFirst(1);
+        linkedList.addLast(20);
+        linkedList.add(2, 25);
+        linkedList.add(3, 7);
+        linkedList.addLast(8);
 
-        System.out.println("\nBuscar(25): " + listaSimple.search(25));
+        System.out.println(linkedList.showListRecursive() +
+                           "\n- Número de elementos: " + linkedList.getSize() + "\n");
 
-        System.out.println("\nContenido: " + listaSimple.showList());
-        System.out.println("- Número de nodos: " + listaSimple.getSize());
+        System.out.println("Buscar el index del elemento con valor 7: " + linkedList.search(7) + "\n");
+        System.out.println("Buscar el index del elemento con valor 6: " + linkedList.search(6) + "\n");
 
-        System.out.println("\nEliminado (Inicio): " + listaSimple.removeFirst());
+        linkedList.sort();
+        System.out.println("Sorted: " + linkedList.showListRecursive() +
+                "\n- Número de elementos: " + linkedList.getSize() + "\n");
 
+        System.out.println("Remove First = " +linkedList.removeFirst() + "\n");
+        System.out.println("Remove Last = " +linkedList.removeLast() + "\n");
 
-        System.out.println("\nEliminado (Fin): " + listaSimple.removeLast());
+        System.out.println(linkedList.showListRecursive() +
+                            "\n- Número de elementos: " + linkedList.getSize() + "\n");
 
+        System.out.println("Remove = " +linkedList.removeAt(2) + "\n");
 
-        System.out.println("\nContenido: " + listaSimple.showListRecursive());
-        System.out.println("- Número de nodos: " + listaSimple.getSize());
+        System.out.println(linkedList.showListRecursive() +
+                            "\n- Número de elementos: " + linkedList.getSize() + "\n");
 
-        System.out.println("\nEliminar en posicion 2: " + listaSimple.removeAt(2));
+        System.out.println("Remove = " +linkedList.remove(2) + "\n");
 
+        linkedList.addLast(3);
+        System.out.println(linkedList.showListRecursive() +
+                "\n- Número de elementos: " + linkedList.getSize() + "\n");
 
-        System.out.println("\nContenido: " + listaSimple.showListRecursive());
-        System.out.println("- Número de nodos: " + listaSimple.getSize());
+        System.out.println("Remove = " +linkedList.remove(8) + "\n");
 
-        System.out.println("\nEliminar en posicion 2: " + listaSimple.removeAt(2));
-
-        listaSimple.addFirst(7);
-
-        System.out.println("\nContenido: " + listaSimple.showListRecursive());
-        System.out.println("- Número de nodos: " + listaSimple.getSize());
-
-        listaSimple.sort();
-
-        System.out.println("\nContenido: " + listaSimple.showListRecursive());
-        System.out.println("- Número de nodos: " + listaSimple.getSize());
-
-
-
-//        listaSimple.shuffle();
-//
-//        System.out.println("\nContenido: " + listaSimple.showElementsRecursive());
-//        System.out.println("- Número de nodos: " + listaSimple.getSize());
-//
-//        listaSimple.ordenarLista();
-//        System.out.println("\nContenido: " + listaSimple.showElementsRecursive());
-//        System.out.println("- Número de nodos: " + listaSimple.getSize());
+        System.out.println(linkedList.showListRecursive() +
+                "\n- Número de elementos: " + linkedList.getSize() + "\n");
 
     }
 }
