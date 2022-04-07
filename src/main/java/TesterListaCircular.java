@@ -7,6 +7,7 @@ public class TesterListaCircular {
         circularList.add(1, 76);
         circularList.addLast(8);
 
+//        System.out.println(circularList.showCircular());
         System.out.println(circularList.showListRecursive() +
                 "\n- Número de elementos: " + circularList.getSize() + "\n");
 

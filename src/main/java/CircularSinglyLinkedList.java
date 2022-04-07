@@ -267,4 +267,13 @@ public class CircularSinglyLinkedList<T extends Comparable<T>>{
         else
             return elements + node.getElement() + " -> " + recursive(node.getNext());
     }
+
+    public String showCircular(){
+        var node = head;
+        var elements = "";
+        for (int i = 0; i< getSize() * 2; i++, node = node.getNext())
+            elements += node.getElement() + " -> ";
+
+        return elements.substring(0, elements.length() - 4);
+    }
 }
