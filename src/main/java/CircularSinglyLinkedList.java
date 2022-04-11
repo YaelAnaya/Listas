@@ -233,8 +233,8 @@ public class CircularSinglyLinkedList<T extends Comparable<T>>{
     }
 
     /**
-     * Este método retorna el contenido de la lista
-     * en forma de String.
+     * Este método recorre la lista de manera Iterativa y
+     * retorna su contenido en forma de String, indicando el inicio y el fin.
      * */
     public String showList(){
         var temp = head;
@@ -245,7 +245,7 @@ public class CircularSinglyLinkedList<T extends Comparable<T>>{
             elements += temp.getElement() + " -> ";
             temp = temp.getNext();
         } while (temp != head);
-        return elements.substring(0, elements.length() - 4);
+        return "Inicio: " + elements.substring(0, elements.length() - 7) + " Fin: " + elements.substring(elements.length() - 6 , elements.length() - 3);
     }
 
     /**
@@ -256,24 +256,33 @@ public class CircularSinglyLinkedList<T extends Comparable<T>>{
         if (head == null)
             return "Lista vacia";
         else
-            return recursive(head);
+            return "Inicio: " + recursive(head);
     }
 
     private String recursive(Node<T> node){
         String elements = "";
 
         if (node.getNext() == head)
-            return elements + node.getElement();
+            return elements + "Fin: " + node.getElement();
         else
             return elements + node.getElement() + " -> " + recursive(node.getNext());
     }
 
-    public String showCircular(){
-        var node = head;
-        var elements = "";
-        for (int i = 0; i< getSize() * 2; i++, node = node.getNext())
-            elements += node.getElement() + " -> ";
+    /**
+     * Este metodo muestra las circularidad de la lista indicando el nodo inicial y final.
+     * */
+    public String showCircularity(){
+        if (head == null)
+            return "Lista vacia";
+        else
+            return "Inicio: " + circularity(head);
+    }
 
-        return elements.substring(0, elements.length() - 4);
+    private String circularity(Node<T> node){
+        String elements = "";
+        if (node.getNext() == head)
+            return elements + "Fin: " + node.getElement() + " -> Inicio: " + node.getNext().getElement();
+        else
+            return elements + node.getElement() + " -> " + circularity(node.getNext());
     }
 }

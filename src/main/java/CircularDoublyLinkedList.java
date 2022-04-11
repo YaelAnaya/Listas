@@ -237,8 +237,8 @@ public class CircularDoublyLinkedList <T extends Comparable<T>>{
     }
 
     /**
-     * Este método retorna el contenido de la lista
-     * en forma de String.
+     * Este método recorre la lista de manera Iterativa y
+     * retorna su contenido en forma de String, indicando el inicio y el fin.
      * */
     public String showList(){
         var temp = head;
@@ -249,9 +249,8 @@ public class CircularDoublyLinkedList <T extends Comparable<T>>{
             elements += temp.getElement() + " -> ";
             temp = temp.getNext();
         } while (temp != head);
-        return elements.substring(0, elements.length() - 4);
+        return "Inicio: " + elements.substring(0, elements.length() - 7) + " Fin: " + elements.substring(elements.length() - 6 , elements.length() - 3);
     }
-
 
     /**
      * Este método utiliza la recursividad para poder
@@ -261,17 +260,34 @@ public class CircularDoublyLinkedList <T extends Comparable<T>>{
         if (head == null)
             return "Lista vacia";
         else
-            return recursive(head);
+            return "Inicio: " + recursive(head);
     }
 
     private String recursive(DoubleNode<T> node){
         String elements = "";
 
         if (node.getNext() == head)
-            return elements + node.getElement();
+            return elements + "Fin: " + node.getElement();
         else
             return elements + node.getElement() + " -> " + recursive(node.getNext());
     }
 
+    /**
+     * Este metodo muestra las circularidad de la lista indicando el nodo inicial y final.
+     * */
+    public String showCircularity(){
+        if (head == null)
+            return "Lista vacia";
+        else
+            return "Inicio: " + circularity(head);
+    }
+
+    private String circularity(DoubleNode<T> node){
+        String elements = "";
+        if (node.getNext() == head)
+            return elements + "Fin: " + node.getElement() + " -> Inicio: " + node.getNext().getElement();
+        else
+            return elements + node.getElement() + " -> " + circularity(node.getNext());
+    }
 
 }

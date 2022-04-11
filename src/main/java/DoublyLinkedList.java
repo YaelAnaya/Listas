@@ -241,7 +241,7 @@ public class DoublyLinkedList<T extends Comparable<T>> {
         if (node.getNext() == null)
             return elements + node.getElement();
         else
-            return elements + node.getElement() + " -> " + recursive(node.getNext());
+            return elements + node.getElement() + " <-> " + recursive(node.getNext());
     }
 
     /**
@@ -256,7 +256,7 @@ public class DoublyLinkedList<T extends Comparable<T>> {
             return "Lista Vacía";
 
         while (auxiliarNode != null) {
-            elements += auxiliarNode.getElement() + " -> ";
+            elements += auxiliarNode.getElement() + " <-> ";
             auxiliarNode = auxiliarNode.getNext();
         }
         return elements.substring(0, elements.length() - 4);
